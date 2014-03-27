@@ -1,0 +1,17 @@
+FROM ubuntu
+MAINTAINER Marcelo Andrade <marcelo.andrade.r@gmail.com>
+
+RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get upgrade -y
+
+RUN apt-get install -y python-software-properties
+RUN add-apt-repository ppa:<<some ppa>>
+RUN apt-get update
+RUN apt-get install -y <<some package provided by the ppa>
+
+EXPOSE 80
+
+ENTRYPOINT ["/usr/bin/executable-non-daemon"]
+
+CMD ["--help"]

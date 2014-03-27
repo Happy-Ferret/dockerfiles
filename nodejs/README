@@ -1,0 +1,5 @@
+After building this Dockerfile you can test it's working with
+
+    docker run -d -v `pwd`:/src -p 8000:8000 marceloandrader/nodejs node /src/index.js
+
+Point the browser to http://<ip-where-docker-run>:8000
