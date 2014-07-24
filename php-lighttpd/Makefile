@@ -15,3 +15,6 @@ enter:
 
 logs:
 	docker logs php
+
+publish:
+	docker push marceloandrader/php-lighttpd
