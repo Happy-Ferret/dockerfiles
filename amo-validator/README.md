@@ -1,3 +1,6 @@
+# Pre-requisites:
+
+Install [docker](http://docs.docker.com/) 
 
 # How to use it:
 
