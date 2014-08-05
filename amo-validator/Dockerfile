@@ -24,5 +24,15 @@ RUN git clone --recursive git://github.com/mozilla/amo-validator.git
 WORKDIR /amo-validator/amo-validator
 RUN pip install -r requirements.txt
 
+# update extras
+RUN cd /amo-validator/amo-validator/extras && \
+	mkdir jslibs && \
+	python jslibfetcher.py && \
+	python build_whitelist.py jslibs/ && \ 
+	mv whitelist_hashes.txt ../validator/testcases/hashes.txt
+
+RUN cd /amo-validator/amo-validator/jetpack && \
+	./generate_jp_whitelist.sh
+
 ENTRYPOINT ["/usr/bin/sudo", "./addon-validator"]
 CMD ["-h"]
