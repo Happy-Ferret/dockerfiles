@@ -16,16 +16,15 @@ RUN mkdir /home/marcelo && chown -R marcelo: /home/marcelo
 WORKDIR /home/marcelo
 ENV HOME /home/marcelo
 
+RUN git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+RUN git clone https://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/vim-colors-solarized
 RUN git clone https://github.com/marceloandrader/dotfiles.git .dotfiles
 RUN chown -R marcelo: .dotfiles
-RUN git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 RUN chown -R marcelo: .vim
-# RUN cd ~/.dotfiles && script/bootstrap -> This need to be run inside the container
-
-EXPOSE 8000
-EXPOSE 8001
-EXPOSE 8002
-EXPOSE 8003
+RUN ln -s ~/.dotfiles/tmux/tmux.conf.symlink .tmux.conf
+RUN ln -s ~/.dotfiles/zsh/zshrc.symlink .zshrc
+RUN ln -s ~/.dotfiles/vim/vimrc.symlink .vimrc
+RUN vim +PluginInstall +qall
 
 USER marcelo
 CMD ["zsh"]
